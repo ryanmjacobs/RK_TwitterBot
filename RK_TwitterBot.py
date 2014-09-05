@@ -12,6 +12,8 @@ __version__ = "0.01"
 
 import os
 import sys
+
+sys.path.append("tweepy")
 import tweepy
 
 # Put your API tokens here
