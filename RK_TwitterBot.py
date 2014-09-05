@@ -11,6 +11,7 @@
 __version__ = "0.01"
 
 import os, sys
+from time import sleep
 sys.path.append("./lib/oauthlib/")
 sys.path.append("./lib/requests-oauthlib/")
 sys.path.append("./lib/requests/")
@@ -24,6 +25,7 @@ access_token        = ""
 access_token_secret = ""
 
 def bot_get():
+    statuses = 1
     return statuses
 
 def bot_process(statuses):
@@ -51,8 +53,10 @@ def main():
         print "Couldn't get API. Quitting."
         sys.exit(1)
 
-    statuses = bot_get()
-    bot_process(statuses)
+    while True:
+        statuses = bot_get()
+        bot_process(statuses)
+        sleep(30000)
 
 if __name__ == "__main__":
     main()
