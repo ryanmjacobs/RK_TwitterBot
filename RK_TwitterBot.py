@@ -8,7 +8,7 @@
 # v0.01 September 04, 2014: File creation.
 ################################################################################
 
-version="0.01"
+__version__ = "0.01"
 
 import os
 import sys
@@ -27,7 +27,7 @@ def bot_process(statuses):
     return True
 
 def main():
-    print os.path.basename(__file__) + " v" + version + "\n"
+    print os.path.basename(__file__) + " v" + __version__ + "\n"
 
     # Authorize to Twitter
     print "Authorizing to Twitter...",
