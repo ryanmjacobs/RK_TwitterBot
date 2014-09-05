@@ -10,10 +10,11 @@
 
 __version__ = "0.01"
 
-import os
-import sys
-
-sys.path.append("tweepy")
+import os, sys
+sys.path.append("./lib/oauthlib/")
+sys.path.append("./lib/requests-oauthlib/")
+sys.path.append("./lib/requests/")
+sys.path.append("./lib/tweepy/")
 import tweepy
 
 # Put your API tokens here

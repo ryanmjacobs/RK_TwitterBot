@@ -1,3 +1,12 @@
 [submodule "tweepy"]
-	path = tweepy
+	path = lib/tweepy
 	url = git://github.com/tweepy/tweepy/
+[submodule "lib/oauthlib"]
+	path = lib/oauthlib
+	url = git://https://github.com/idan/oauthlib
+[submodule "lib/requests-oauthlib"]
+	path = lib/requests-oauthlib
+	url = git://github.com/requests/requests-oauthlib
+[submodule "lib/requests"]
+	path = lib/requests
+	url = git://github.com/kennethreitz/requests/
