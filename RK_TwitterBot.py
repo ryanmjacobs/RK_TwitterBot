@@ -7,11 +7,13 @@
 #
 # v0.01 September 04, 2014: File creation.
 # v0.02 September 04, 2014: Added 'Del Oro' functionality.
+# v0.03 September 19, 2014: Added 'replying w/ image' functionality.
 ################################################################################
 
-__version__ = "0.02"
+__version__ = "0.03"
 
 import os, sys
+import urllib, json
 from time import sleep
 sys.path.append("./lib/oauthlib/")
 sys.path.append("./lib/requests-oauthlib/")
@@ -26,11 +28,7 @@ access_token        = ""
 access_token_secret = ""
 
 def bot_get(api):
-    statuses = []
-
-    for s in api.search(["Hate Del Oro"], count=1):
-        statuses.append(s)
-
+    statuses = api.user_timeline(username_goes_here, count=1)
     return statuses
 
 def bot_process(api, statuses, last_id):
@@ -45,13 +43,33 @@ def bot_process(api, statuses, last_id):
             return last_id
 
         try:
-            reply = "@" + name + " You said, \"" + text + "\"... No you don't. You love Del Oro!"
+            search_term = text.split(' ')[0]
+            photo_url = google_image(search_term)
+            if photo_url == "ERROR":
+                reply = "uh oh. Something went really wrong. Tell Ryan to fix his bug-filled code."
+            else:
+                reply = "@" + name + " Here's a photo of that: " + str(photo_url)
             api.update_status(reply, status_id)
-            print "\tReply: '" + reply + "'"
+            print "\tReply: '" + reply
         except tweepy.TweepError as e:
             print "\tError", str(e.message[0]["code"]) + ":", e.message[0]["message"]
 
         return status_id
+
+def google_image(search_string):
+    rest = "ERROR" # default return
+    search = search_string.split()
+    search = '%20'.join(map(str, search))
+    url = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s&safe=off' % search
+    search_results = urllib.urlopen(url).read()
+    try:
+        js = json.loads(search_results.decode())
+        results = js['responseData']['results']
+        for i in results:
+            rest = i['unescapedUrl']
+    except:
+        print "Error: couldn't read json"
+    return rest
 
 def countdown(string, seconds):
     for i in range(seconds, 0, -1):
