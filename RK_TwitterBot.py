@@ -46,7 +46,7 @@ def bot_process(api, statuses, last_id):
             search_term = text.split(' ')[0]
             photo_url = google_image(search_term)
             if photo_url == "ERROR":
-                reply = "uh oh. Something went really wrong. Tell Ryan to fix his bug-filled code."
+                reply = "Uh oh. Something went really wrong. Tell Ryan to fix his bug-filled code."
             else:
                 reply = "@" + name + " Here's a photo of that: " + str(photo_url)
             api.update_status(reply, status_id)
