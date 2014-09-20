@@ -28,7 +28,7 @@ access_token        = ""
 access_token_secret = ""
 
 def bot_get(api):
-    statuses = api.user_timeline(username_goes_here, count=1)
+    statuses = api.user_timeline('TWITTER_USERNAME', count=1)
     return statuses
 
 def bot_process(api, statuses, last_id):
@@ -46,9 +46,11 @@ def bot_process(api, statuses, last_id):
             search_term = text.split(' ')[0]
             photo_url = google_image(search_term)
             if photo_url == "ERROR":
+                print "We had an error with the google image search results. Quitting."
                 reply = "Uh oh. Something went really wrong. Tell Ryan to fix his bug-filled code."
-            else:
-                reply = "@" + name + " Here's a photo of that: " + str(photo_url)
+
+            reply = "@" + name + " Here's a photo of that: " + str(photo_url)
+
             api.update_status(reply, status_id)
             print "\tReply: '" + reply
         except tweepy.TweepError as e:
