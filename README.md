@@ -22,4 +22,4 @@ License
 
 MIT License - see LICENSE
 
-Copyright (c) 2017 Ryan Jacobs, Kyle Domen
+Copyright (c) 2018 Ryan Jacobs, Kyle Domen
